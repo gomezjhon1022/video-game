@@ -1,5 +1,9 @@
 const canvas = document.querySelector('#game');
 const game = canvas.getContext('2d');
+const btnUp = document.querySelector('#up');
+const btnLeft = document.querySelector('#left');
+const btnRight = document.querySelector('#right');
+const btnDown = document.querySelector('#down');
 
 let canvasSize;
 let elementsSize;
@@ -27,7 +31,42 @@ function startGame() {
   game.font = elementsSize + 'px Verdana';
   game.textAlign = 'end';
 
-  for (let i = 1; i <= 10; i++) {
-    game.fillText(emojis['X'], elementsSize, elementsSize * i);
-  }
+  const map = maps[1];
+  const mapRows = map.trim().split('\n');
+  const mapRowCols = mapRows.map(row => row.trim().split(''));
+  console.log({map, mapRows, mapRowCols});
+
+  mapRowCols.forEach((row, rowI) => {
+    row.forEach((col, colI) => {
+      const emoji = emojis[col];
+      const posX = elementsSize * (colI + 1);
+      const posY = elementsSize * (rowI + 1);
+      game.fillText(emoji, posX, posY);
+    });
+  });
+}
+
+window.addEventListener('keydown', moveByKeys);
+btnUp.addEventListener('click', moveUp);
+btnLeft.addEventListener('click', moveLeft);
+btnRight.addEventListener('click', moveRight);
+btnDown.addEventListener('click', moveDown);
+
+function moveByKeys(event) {
+  if (event.key == 'ArrowUp') moveUp();
+  else if (event.key == 'ArrowLeft') moveLeft();
+  else if (event.key == 'ArrowRight') moveRight();
+  else if (event.key == 'ArrowDown') moveDown();
+}
+function moveUp() {
+  console.log('Me quiero mover hacia arriba');
+}
+function moveLeft() {
+  console.log('Me quiero mover hacia izquierda');
+}
+function moveRight() {
+  console.log('Me quiero mover hacia derecha');
+}
+function moveDown() {
+  console.log('Me quiero mover hacia abajo');
 }
