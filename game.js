@@ -13,6 +13,11 @@ const playerPosition = {
   y: undefined,
 };
 
+const giftPosition = {
+  x: undefined,
+  y: undefined,
+};
+
 window.addEventListener('load', setCanvasSize);
 window.addEventListener('resize', setCanvasSize);
 
@@ -39,7 +44,6 @@ function startGame() {
   const map = maps[0];
   const mapRows = map.trim().split('\n');
   const mapRowCols = mapRows.map(row => row.trim().split(''));
-  console.log({map, mapRows, mapRowCols});
 
   game.clearRect( 0, 0, canvasSize, canvasSize);
   mapRowCols.forEach((row, rowI) => {
@@ -54,7 +58,11 @@ function startGame() {
         playerPosition.y = posY;
         console.log({playerPosition});
         }
-      }
+        } else if (col == 'I') {
+          giftPosition.x = posX;
+          giftPosition.y = posY;
+          console.log({giftPosition});
+        }
 
       game.fillText(emoji, posX, posY);
     });
@@ -63,7 +71,16 @@ function startGame() {
 }
 
 function movePlayer() {
+  const giftCollisionX = playerPosition.x.toFixed(3) == giftPosition.x.toFixed(3);
+  const giftCollisionY = playerPosition.y.toFixed(3) == giftPosition.y.toFixed(3);
+  const giftCollision = giftCollisionX && giftCollisionY;
+
+  if (giftCollision) {
+    console.log('Subiste de nivel!');
+  }
+
   game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y);
+  console.log({playerPosition});
 }
 
 window.addEventListener('keydown', moveByKeys);
@@ -89,7 +106,7 @@ function moveUp() {
 }
 function moveLeft() {
   console.log('Me quiero mover hacia izquierda');
-  if ((playerPosition.x - elementsSize) < 0) {
+  if ((playerPosition.x - elementsSize) < elementsSize) {
     console.log('OUT');
   } else {
     playerPosition.x -= elementsSize;
