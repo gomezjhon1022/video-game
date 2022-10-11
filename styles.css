@@ -34,8 +34,8 @@ button {
   border-radius: 8px;
   border-color: #f30505;
   font-family: inherit;
-  margin: 0;
-  padding: 5px 20px;
+  margin: 0 auto;
+  padding: 5px 10px;
   width: 100px;
 }
 
