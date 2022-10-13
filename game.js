@@ -66,7 +66,7 @@ function startGame() {
 
   if (!timeStart) {
     timeStart = Date.now();
-    timeInterval = setInterval(showTime,50);
+    timeInterval = setInterval(showTime,100);
     showRecord();
   }
 
