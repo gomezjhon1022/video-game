@@ -167,7 +167,8 @@ function gameWin() {
       pResult.innerHTML = 'Record no superado';
     }
   } else {
-    pResult.innerHTML = 'No hay record aún, se el primero en establecer uno';
+    localStorage.setItem('record_time', playerTime);
+    pResult.innerHTML = 'No hay record aún, eres el primero en establecer uno';
   }
   console.log({recordTime, playerTime})
 }
