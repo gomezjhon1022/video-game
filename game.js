@@ -66,7 +66,7 @@ function startGame() {
 
   if (!timeStart) {
     timeStart = Date.now();
-    timeInterval = setInterval(showTime,100);
+    timeInterval = setInterval(showTime,50);
     showRecord();
   }
 
@@ -156,6 +156,7 @@ function levelFail() {
 function gameWin() {
   console.log('¡Terminaste el juego!');
   clearInterval(timeInterval);
+  timeInterval = undefined;
   const recordTime = localStorage.getItem('record_time');
   const playerTime =Date.now() - timeStart;
   if (recordTime) {
